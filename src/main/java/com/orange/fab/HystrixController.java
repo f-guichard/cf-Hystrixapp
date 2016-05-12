@@ -15,6 +15,12 @@ import org.springframework.http.ResponseEntity;
 @RestController
 public class HystrixController {
 
+	@Value("${microservice.version}")
+	private String microservice_version;
+	
+	@Value("${microservice.name}")
+	private String microservice_name;
+
 	//Added 4 Hystrix
 	private final HystrixTrial ht;
 
@@ -29,6 +35,7 @@ public class HystrixController {
     {
     	HttpHeaders httpHeaders = new HttpHeaders();
       	httpHeaders.set("hystrIX", "YES");
+        httpHeaders.set(microservice_name, microservice_version);
       	String HystrixOperationState = ht.SearchUrl4Broker();
     	return new ResponseEntity<String>(HystrixOperationState, httpHeaders, HttpStatus.OK);
     }

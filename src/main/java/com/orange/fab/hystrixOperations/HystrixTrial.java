@@ -1,6 +1,7 @@
 package com.orange.fab.hystrixOperations;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand; // ;)
+import org.springframework.cloud.netflix.hystrix.EnableHystrix; // spring-cloud-starter, spring-cloud-hystrix-starter
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +14,7 @@ import org.springframework.web.client.RestOperations;
 import org.springframework.web.util.UriComponentsBuilder;
 
 //Hystrix from Netflix oss
+@EnableHystrix
 @Service
 public class HystrixTrial {
 	
