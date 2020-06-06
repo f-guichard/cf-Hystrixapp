@@ -39,4 +39,20 @@ public class HystrixController {
       	String HystrixOperationState = ht.SearchUrl4Broker();
     	return new ResponseEntity<String>(HystrixOperationState, httpHeaders, HttpStatus.OK);
     }
+	
+	@RequestMapping(method=RequestMethod.GET, value="/raw")
+    public ResponseEntity<String> sendRawQuery(@RequestHeader MultiValueMap<String, String> queryHeaders)
+    {
+		String rawResponse = "<br>Raw HTTP Query Headers<br>";
+		rawResponse += "++++++++++++++++++++++++++++++";
+		queryHeaders.forEach((key, value) -> {
+        rawResponse += String.format(
+          "<br>'%s' = %s", key, value.stream().collect(Collectors.joining("|"))));
+		});
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set(microservice_name, microservice_version);
+      	
+    	return new ResponseEntity<String>(rawResponse, httpHeaders, HttpStatus.OK);
+    }
 }
